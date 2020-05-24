@@ -1,6 +1,5 @@
 var prot = require('protractor');
 var cmnUtil = require('./../Util/CommonUtil.js');
-var EC = prot.ExpectedConditions;
 
 function homePage() {
     var oManageUsers = prot.element(prot.by.xpath("//*[contains(text(),'Manage Users')]"));

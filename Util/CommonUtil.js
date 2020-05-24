@@ -16,7 +16,7 @@ function commonUtil() {
     }
 
     this.waitForElement = async function(obj) {
-        await prot.browser.wait(EC.elementToBeClickable(obj),30000);
+        await prot.browser.wait(EC.elementToBeClickable(obj),10000);
     }
 
     this.clickElement = async function(obj) {
@@ -27,6 +27,19 @@ function commonUtil() {
     this.setData = async function(obj,strData) {
         await this.waitForElement(obj);
         await obj.sendKeys(strData);
+    }
+
+    this.setDataJS = async function(obj,strData) {
+        await this.waitForElement(obj);
+        await prot.browser.executeScript("arguments[0].value='" + strData + "'",obj);
+    }
+
+    this.setDataWOWait = async function(obj,strData) {
+        await obj.sendKeys(strData);
+    }
+
+    this.clickElementWOWait = async function(obj) {
+        await obj.click();
     }
 
     this.clickText = async function(strText) {

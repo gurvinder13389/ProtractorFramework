@@ -1,24 +1,27 @@
 var prot = require('protractor');
+var cmnUtil = require('./../Util/CommonUtil.js');
 
 function loginPage() {
-    this.setUserName = async function(strUserName) {
-       await prot.element(prot.by.xpath("//input[@placeholder='Username']")).sendKeys(strUserName);
-    };
+   var oUserName = prot.element(prot.by.xpath("//input[@placeholder='Username']"));
+   var oPassword = prot.element(prot.by.xpath("//input[@placeholder='Password']"));
+   var oLogin = prot.element(prot.by.xpath("//span[text()='Log in']"));
 
-    this.setPassword = async function(strPassword) {
-       await prot.element(prot.by.xpath("//input[@placeholder='Password']")).sendKeys(strPassword);
-        
-    };
-    this.clickLogin = async function() {
-       await prot.element(prot.by.xpath("//span[text()='Log in']")).click();
-    };
+   this.setUserName = async function(strUserName) {
+      await cmnUtil.setData(oUserName,strUserName);
+   };
 
-    this.login = async function(strUserName,strPassword) {
+   this.setPassword = async function(strPassword) {
+      await cmnUtil.setData(oPassword,strPassword);
+   };
+
+   this.clickLogin = async function() {
+      await cmnUtil.clickElementWOWait(oLogin);
+   };
+
+   this.login = async function(strUserName,strPassword) {
       await this.setUserName(strUserName);
       await this.setPassword(strPassword);
       await this.clickLogin();
-       
    };
-    
 };
 module.exports = new loginPage();
